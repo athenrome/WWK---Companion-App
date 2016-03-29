@@ -4,10 +4,9 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
     List<Rule> ruleList;
-    bool audioPlay;
 
     AudioSource audio;
-    public List<AudioClip> audioClips;
+    public AudioClip audioClip;
 
     void Awake()
     {
@@ -43,11 +42,11 @@ public class GameController : MonoBehaviour {
 
     public void PlayBtnPressed()
     {
-        audioPlay = true;
+        audio.PlayOneShot(audioClip);
     }
 
     public void StopBtnPressed()
     {
-        audioPlay = true;
+        audio.Pause();
     }
 }
