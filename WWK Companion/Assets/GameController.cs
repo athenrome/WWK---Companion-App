@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class GameController : MonoBehaviour {
 
     public List<GameObject> SetupInstructions;
-    public List<GameObject> GameRules;
+    public List<GameObject> TutorialSteps;
 
     public GameObject MainScreen;
 
@@ -94,10 +94,13 @@ public class GameController : MonoBehaviour {
         if(currSetup >= SetupInstructions.Count)
         {
             currSetup = 0;
+
             
         }
 
+
         ClearScreen();
+        SetupScreen.SetActive(true);
         SetupInstructions[currSetup].SetActive(true);
 
         currSetup++;
@@ -111,7 +114,7 @@ public class GameController : MonoBehaviour {
             obj.SetActive(false);
         }
 
-        foreach (GameObject obj in GameRules)
+        foreach (GameObject obj in TutorialSteps)
         {
             obj.SetActive(false);
         }
@@ -119,6 +122,8 @@ public class GameController : MonoBehaviour {
         WizardScreen.SetActive(false);
         CardScreen.SetActive(false);
         TileScreen.SetActive(false);
+        MainScreen.SetActive(false);
+        SetupScreen.SetActive(false); 
     }
 
 
