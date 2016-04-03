@@ -3,21 +3,38 @@ using System.Collections.Generic;
 
 public class GameController : MonoBehaviour {
 
-    List<Rule> ruleList;
+    public List<GameObject> SetupInstructions;
+    public List<GameObject> GameRules;
 
-    AudioSource audio;
+    public GameObject MainScreen;
+
+    public GameObject CoinsScreen;
+    public GameObject WizardScreen;
+    public GameObject CardScreen;
+    public GameObject TileScreen;
+
+    public GameObject SetupScreen;
+
+    AudioSource audioSource;
     public AudioClip audioClip;
 
-    void Awake()
-    {
-        audio = FindObjectOfType<AudioSource>();
-    }
+    int currSetup;
+    int currRule;
+    GameObject currScreen;
+
 
 	// Use this for initialization
 	void Start () {
-        
-	
-	}
+        audioSource = FindObjectOfType<AudioSource>();
+        ClearScreen();
+
+        currSetup = 0;
+
+        PlayBtnPressed();
+
+        ShowMainScreen();
+
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -25,28 +42,91 @@ public class GameController : MonoBehaviour {
 	
 	}
 
-    public void RulesBtnPressed()
+    public void CoinsBtnPressed()
     {
-
+        ClearScreen();
+        CoinsScreen.SetActive(true);
     }
 
-    public void SetupBtnPressed()
+    public void CardsBtnPressed()
     {
-
+        ClearScreen();
+        CardScreen.SetActive(true);
     }
 
-    public void ViewerBtnPressed()
+    public void WizardsBtnPressed()
+    {
+        ClearScreen();
+        WizardScreen.SetActive(true);
+    }
+
+    public void TilesBtnPressed()
+    {
+        ClearScreen();
+        TileScreen.SetActive(true);
+    }
+
+    public void TuteBtnPressed()
     {
 
     }
 
     public void PlayBtnPressed()
     {
-        audio.PlayOneShot(audioClip);
+        audioSource.PlayOneShot(audioClip);
     }
 
     public void StopBtnPressed()
     {
-        audio.Pause();
+        audioSource.Pause();
+    }
+
+    public void SetupBtnPressed()
+    {
+        //currSetup = 0;
+        NextSetupStep();
+    }
+
+    public void NextSetupStep()
+    {        
+        
+
+        if(currSetup >= SetupInstructions.Count)
+        {
+            currSetup = 0;
+            
+        }
+
+        ClearScreen();
+        SetupInstructions[currSetup].SetActive(true);
+
+        currSetup++;
+
+    }
+
+    void ClearScreen()
+    {
+        foreach(GameObject obj in SetupInstructions)
+        {
+            obj.SetActive(false);
+        }
+
+        foreach (GameObject obj in GameRules)
+        {
+            obj.SetActive(false);
+        }
+        CoinsScreen.SetActive(false);
+        WizardScreen.SetActive(false);
+        CardScreen.SetActive(false);
+        TileScreen.SetActive(false);
+    }
+
+
+
+    void ShowMainScreen()
+    {
+        SetupScreen.SetActive(false);
+       
+        MainScreen.SetActive(true);
     }
 }
