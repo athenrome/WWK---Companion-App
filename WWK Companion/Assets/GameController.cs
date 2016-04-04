@@ -6,7 +6,8 @@ public class GameController : MonoBehaviour {
     public List<GameObject> SetupInstructions;
     public List<GameObject> TutorialSteps;
 
-    public GameObject MainScreen;
+    public List<GameObject> MainMenuButtons;
+    public List<GameObject> RulesMenuButtons;
 
     public GameObject CoinsScreen;
     public GameObject WizardScreen;
@@ -47,46 +48,38 @@ public class GameController : MonoBehaviour {
         ClearScreen();
         CoinsScreen.SetActive(true);
     }
-
     public void CardsBtnPressed()
     {
         ClearScreen();
         CardScreen.SetActive(true);
     }
-
     public void WizardsBtnPressed()
     {
         ClearScreen();
         WizardScreen.SetActive(true);
     }
-
     public void TilesBtnPressed()
     {
         ClearScreen();
         TileScreen.SetActive(true);
     }
-
     public void TuteBtnPressed()
     {
 		NextTutorialStep ();
     }
-
     public void PlayBtnPressed()
     {
         audioSource.PlayOneShot(audioClip);
     }
-
     public void StopBtnPressed()
     {
         audioSource.Pause();
     }
-
     public void SetupBtnPressed()
     {
         //currSetup = 0;
         NextSetupStep();
     }
-
 	public void NextTutorialStep()
 	{        
 
@@ -104,7 +97,6 @@ public class GameController : MonoBehaviour {
 		currTute++;
 
 	}
-
     public void NextSetupStep()
     {        
         
@@ -124,32 +116,49 @@ public class GameController : MonoBehaviour {
         currSetup++;
 
     }
+    public void Rules_BtnPressed()
+    {
+        ClearScreen();
+
+        ChangeObjectStates(MainMenuButtons, false);
+        ChangeObjectStates(RulesMenuButtons, true);
+
+        //MainScreen.SetActive(false);
+        //RulesMenu.SetActive(true);
+
+
+    }
 
     void ClearScreen()
     {
-        foreach(GameObject obj in SetupInstructions)
-        {
-            obj.SetActive(false);
-        }
 
-        foreach (GameObject obj in TutorialSteps)
-        {
-            obj.SetActive(false);
-        }
+        ChangeObjectStates(SetupInstructions, false);
+
+        ChangeObjectStates(TutorialSteps, false);
+
         CoinsScreen.SetActive(false);
         WizardScreen.SetActive(false);
         CardScreen.SetActive(false);
         TileScreen.SetActive(false);
-        MainScreen.SetActive(false);
+        //MainScreen.SetActive(false);
         SetupScreen.SetActive(false); 
     }
 
+    void ChangeObjectStates(List<GameObject> _list, bool state)
+    {
+        foreach (GameObject obj in _list)
+        {
+            obj.SetActive(state);
+        }
 
+        print("changed states");
+    }
 
     void ShowMainScreen()
     {
         SetupScreen.SetActive(false);
-       
-        MainScreen.SetActive(true);
+
+        ChangeObjectStates(MainMenuButtons, true);
+        ChangeObjectStates(RulesMenuButtons, false);
     }
 }
