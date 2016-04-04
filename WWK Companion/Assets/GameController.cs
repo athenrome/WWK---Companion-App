@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
     public AudioClip audioClip;
 
     int currSetup;
-    int currRule;
+    int currTute;
     GameObject currScreen;
 
 
@@ -68,7 +68,7 @@ public class GameController : MonoBehaviour {
 
     public void TuteBtnPressed()
     {
-
+		NextTutorialStep ();
     }
 
     public void PlayBtnPressed()
@@ -86,6 +86,24 @@ public class GameController : MonoBehaviour {
         //currSetup = 0;
         NextSetupStep();
     }
+
+	public void NextTutorialStep()
+	{        
+
+
+		if(currTute >= TutorialSteps.Count)
+		{
+			currTute = 0;
+
+		}
+
+
+		ClearScreen();
+		TutorialSteps[currTute].SetActive(true);
+
+		currTute++;
+
+	}
 
     public void NextSetupStep()
     {        
