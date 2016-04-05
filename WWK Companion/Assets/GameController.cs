@@ -100,7 +100,7 @@ public class GameController : MonoBehaviour {
 
     public void NextSetupStep()
     {
-        currSetup++;
+        
 
         if (currSetup >= SetupInstructions.Count)
         {
@@ -114,8 +114,8 @@ public class GameController : MonoBehaviour {
         SetupScreen.SetActive(true);
         SetupInstructions[currSetup].SetActive(true);
 
-        
 
+        currSetup++;
     }
 
     public void PrevSetupStep()
