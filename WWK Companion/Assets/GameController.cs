@@ -27,9 +27,10 @@ public class GameController : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        ClearScreen();
+        //ClearScreen();
 
         currSetup = 0;
+        currTute = 0;
 
         //PlayBtnPressed();
 
@@ -150,6 +151,8 @@ public class GameController : MonoBehaviour {
 
         ChangeObjectStates(MainMenuButtons, false);
         ChangeObjectStates(RulesMenuButtons, true);
+
+        ShowLogo();
     }
     public void MainMenuBtnPressed()
     {
@@ -157,6 +160,8 @@ public class GameController : MonoBehaviour {
 
         ChangeObjectStates(MainMenuButtons, true);
         ChangeObjectStates(RulesMenuButtons, false);
+
+        ShowLogo();
     }
 
     void ShowLogo()
@@ -192,7 +197,10 @@ public class GameController : MonoBehaviour {
 
     void ShowMainScreen()
     {
+        ClearScreen();
+
         SetupScreen.SetActive(false);
+        ShowLogo();
 
         ChangeObjectStates(MainMenuButtons, true);
         ChangeObjectStates(RulesMenuButtons, false);
