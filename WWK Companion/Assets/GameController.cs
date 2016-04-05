@@ -97,11 +97,12 @@ public class GameController : MonoBehaviour {
 		currTute++;
 
 	}
-    public void NextSetupStep()
-    {        
-        
 
-        if(currSetup >= SetupInstructions.Count)
+    public void NextSetupStep()
+    {
+        currSetup++;
+
+        if (currSetup >= SetupInstructions.Count)
         {
             currSetup = 0;
 
@@ -113,7 +114,26 @@ public class GameController : MonoBehaviour {
         SetupScreen.SetActive(true);
         SetupInstructions[currSetup].SetActive(true);
 
-        currSetup++;
+        
+
+    }
+
+    public void PrevSetupStep()
+    {
+
+        currSetup--;
+
+        if (currSetup < 0)
+        {
+            currSetup = SetupInstructions.Count;
+        }
+
+
+        ClearScreen();
+        SetupScreen.SetActive(true);
+        SetupInstructions[currSetup].SetActive(true);
+
+        
 
     }
     public void Rules_BtnPressed()
@@ -122,11 +142,13 @@ public class GameController : MonoBehaviour {
 
         ChangeObjectStates(MainMenuButtons, false);
         ChangeObjectStates(RulesMenuButtons, true);
+    }
+    public void MainMenuBtnPressed()
+    {
+        ClearScreen();
 
-        //MainScreen.SetActive(false);
-        //RulesMenu.SetActive(true);
-
-
+        ChangeObjectStates(MainMenuButtons, true);
+        ChangeObjectStates(RulesMenuButtons, false);
     }
 
     void ClearScreen()
