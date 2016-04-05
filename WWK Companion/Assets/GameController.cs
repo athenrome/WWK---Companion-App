@@ -15,23 +15,23 @@ public class GameController : MonoBehaviour {
     public GameObject TileScreen;
 
     public GameObject SetupScreen;
+    public GameObject TuteScreen;
 
-    AudioSource audioSource;
-    public AudioClip audioClip;
+    public GameObject Logo;
 
     int currSetup;
     int currTute;
-    GameObject currScreen;
+    
 
 
 	// Use this for initialization
 	void Start () {
-        audioSource = FindObjectOfType<AudioSource>();
+
         ClearScreen();
 
         currSetup = 0;
 
-        PlayBtnPressed();
+        //PlayBtnPressed();
 
         ShowMainScreen();
 
@@ -67,14 +67,6 @@ public class GameController : MonoBehaviour {
     {
 		NextTutorialStep ();
     }
-    public void PlayBtnPressed()
-    {
-        audioSource.PlayOneShot(audioClip);
-    }
-    public void StopBtnPressed()
-    {
-        audioSource.Pause();
-    }
     public void SetupBtnPressed()
     {
         //currSetup = 0;
@@ -92,12 +84,29 @@ public class GameController : MonoBehaviour {
 
 
 		ClearScreen();
-		TutorialSteps[currTute].SetActive(true);
+        TuteScreen.SetActive(true);
+        TutorialSteps[currTute].SetActive(true);
 
 		currTute++;
 
 	}
+    public void PrevTutorialStep()
+    {
 
+
+        currTute--;
+
+        if (currTute < 0)
+        {
+            currTute = TutorialSteps.Count;
+        }
+
+
+        ClearScreen();
+        TuteScreen.SetActive(true);
+        TutorialSteps[currTute].SetActive(true);
+
+    }
     public void NextSetupStep()
     {
         
@@ -117,7 +126,6 @@ public class GameController : MonoBehaviour {
 
         currSetup++;
     }
-
     public void PrevSetupStep()
     {
 
@@ -151,18 +159,24 @@ public class GameController : MonoBehaviour {
         ChangeObjectStates(RulesMenuButtons, false);
     }
 
+    void ShowLogo()
+    {
+        ClearScreen();
+        Logo.SetActive(true);
+    }
+
     void ClearScreen()
     {
 
         ChangeObjectStates(SetupInstructions, false);
 
         ChangeObjectStates(TutorialSteps, false);
-
+        Logo.SetActive(false);
         CoinsScreen.SetActive(false);
         WizardScreen.SetActive(false);
         CardScreen.SetActive(false);
         TileScreen.SetActive(false);
-        //MainScreen.SetActive(false);
+        TuteScreen.SetActive(false);
         SetupScreen.SetActive(false); 
     }
 
